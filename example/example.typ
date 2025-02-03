@@ -1,52 +1,50 @@
-#import "@preview/touying:0.4.2": *
-#import "../tud-slides.typ"
+#import "@preview/touying:0.5.5": *
+#import "../tud-slides.typ": *
 
-#let s = tud-slides.register(aspect-ratio: "16-9", debug: false)
-#let s = (s.methods.info)(
-  self: s,
-  title: [Your Title],
-  subtitle: [Your Subtitle],
-  author: [Firstname Lastname],
-  date: datetime.today(),
-  institution: [Institution],
-  location: [Location],
+#show: tud-slides-theme.with(
+  aspect-ratio: "16-9",
+  debug: false,
+  config-info(
+    title: [Your Title \ with linebreak],
+    alttitle: [Your Title without linebreak],
+    subtitle: [Your Subtitle],
+    author: [Firstname Lastname],
+    date: datetime.today(),
+    institution: [Institution],
+    location: [Location],
+  ),
 )
-#let (init, slides, touying-outline, alert) = utils.methods(s)
-#show: init
 
-#let (slide, title-slide) = utils.slides(s)
-#show: slides
+#title-slide()
 
-= Title
+#outline-slide()
 
-== First Topic
+= 1st Section Title
 
-#slide[
-  Hello, Touying!
+== 1st Topic
 
-  #pause
+=== Slide title
 
-  Hello, Typst!
+Hello, Touying!
 
-  #lorem(40)
-]
+#lorem(40)
 
-#slide(subtitle: "1st Subtitle")[
-  #lorem(40)
-]
+== 2nd Topic
 
-== Second Topic
+Hello, Typst!
 
-#slide[
-  #lorem(40)
-]
+#lorem(40)
 
-#slide(subtitle: "2nd Subtitle")[
-  #lorem(40)
-]
 
-== Third Topic
+== 3rd Topic
 
-#slide(subtitle: "3nd Subtitle")[
-  #lorem(40)
-]
+#lorem(40)
+
+= 2nd Section Title
+
+== Topic Title
+
+=== Slide title
+
+#lorem(100)
+

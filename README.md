@@ -9,6 +9,10 @@ This template builds on [Touying](https://github.com/touying-typ/touying).
 Further information on its features and how to use them can be found in the [Touying tutorial](https://touying-typ.github.io/touying/docs/intro).
 
 ## Installation and Usage
+### 0. install Open Sans
+- install Open Sans from https://github.com/googlefonts/opensans/tree/main/fonts/ttf
+- Typst does not yet support variable fonts, thus you need to use separate ttf files for each weight and style
+
 ### 1. get the template
 - clone this repository with git
 
@@ -18,37 +22,39 @@ git clone https://github.com/typst-tud/tud-slides.git
 
 - or download as a ZIP-file: https://github.com/typst-tud/tud-slides/archive/refs/heads/main.zip
 
-
 ### 2. import Touying and this template into your document
 
 ```typst
-    #import "@preview/touying:0.4.2": *
-    #import "tud-slides.typ"
+#import "@preview/touying:0.5.5": *
+#import "../tud-slides.typ": *
 
-    #let s = tud-slides.register(aspect-ratio: "16-9", debug: true)
-    #let s = (s.methods.info)(
-    self: s,
-        title: [Your Title],
-        subtitle: [Your Subtitle],
-        author: [Firstname Lastname],
-        date: datetime.today(),
-        institution: [Institution],
-        location: [Location],
-    )
-    #let (init, slides, touying-outline, alert) = utils.methods(s)
-    #show: init
+#show: tud-slides-theme.with(
+  aspect-ratio: "16-9",
+  debug: true,
+  config-info(
+    title: [Your Title],
+    alttitle: none,
+    subtitle: [Your Subtitle],
+    author: [Firstname Lastname],
+    date: datetime.today(),
+    institution: [Institution],
+    location: [Location],
+  ),
+)
 
-    #let (slide, title-slide) = utils.slides(s)
-    #show: slides
+#title-slide()
 
-    = Title
-    == First Topic
-    #slide[
-        Hello, Touying!
+#outline-slide()
 
-        #lorem(40)
-    ]
+= Section Title
 
+== First Topic
+
+=== Slide title
+
+  Hello, Touying!
+
+  #lorem(40)
 ```
 
 ## Acknowledgments
