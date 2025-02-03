@@ -181,7 +181,34 @@
   touying-slide(self: self, body)
 })
 
-  (self.methods.touying-slide)(self: self, repeat: none, body)
+/*
+ * Outline Slide
+ */
+#let outline-slide(
+  ..args,
+) = {
+
+  let body = {
+    components.adaptive-columns({
+      show outline.entry: it => {
+        if it.at("label", default: none) == <modified-entry> {
+          it // prevent infinite recursion
+        } else {
+          [#outline.entry(
+            it.level,
+            it.element,
+            it.body,
+            [],  // remove fill
+            []  // remove page number
+          ) <modified-entry>]
+        }
+      }
+
+      outline(depth: 1, title: none, indent: 1em)
+    })
+  }
+
+  slide(title: "Outline", body, ..args)
 }
 
 /*
